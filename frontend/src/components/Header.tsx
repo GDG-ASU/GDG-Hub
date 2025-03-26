@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-// import GDG from '../assets/images/gdg.png'
+import axios from "axios";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const isAuthenticated = localStorage.getItem("token") !== null; // Check if the user is authenticated
+
+  const handleDelete = () => {
+    // Remove the token from localStorage
+    localStorage.removeItem("token");
+    console.log("User logged out and token removed.");
+    // Optionally, redirect the user to the login page or home page
+    window.location.href = "/login"; // Redirect after logout
+  };
 
   return (
     <header className={`absolute left-0 top-0 z-20 flex w-full items-center`}>
@@ -11,7 +20,9 @@ const Navbar = () => {
           <div className="w-[400px] max-w-full px-4">
             <a href="/#" className="block w-full py-5">
               <img
-                src={'https://firebasestorage.googleapis.com/v0/b/spotlight-53c23.appspot.com/o/GDGlogo.png?alt=media&token=d67ad5e5-5479-4d3b-a782-a4b09104fea7'}
+                src={
+                  "https://firebasestorage.googleapis.com/v0/b/spotlight-53c23.appspot.com/o/GDGlogo.png?alt=media&token=d67ad5e5-5479-4d3b-a782-a4b09104fea7"
+                }
                 alt="logo"
                 className="w-full "
               />
@@ -37,27 +48,39 @@ const Navbar = () => {
                 } `}
               >
                 <ul className="block lg:flex">
-                  <ListItem NavLink="/create"  children={undefined}>Create Post</ListItem>
-                  {/* <ListItem NavLink="/#"  children={undefined}>Payment</ListItem>
-                  <ListItem NavLink="/#"  children={undefined}>About</ListItem>
-                  <ListItem NavLink="/#"  children={undefined}>Blog</ListItem> */}
+                  {isAuthenticated && (
+                    <ListItem NavLink="/create">Create Post</ListItem>
+                  )}
                 </ul>
               </nav>
             </div>
             <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
-              <a
-                href="/login"
-                className="font-roboto px-7 py-3 text-base font-medium text-dark  "
-              >
-                Sign in
-              </a>
+              {isAuthenticated ? (
+                <>
+                  <button
+                    onClick={handleDelete}
+                    className="font-roboto rounded-lg bg-red-600 px-7 py-3 text-base font-medium text-white"
+                  >
+                    Log Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <a
+                    href="/login"
+                    className="font-roboto px-7 py-3 text-base font-medium text-dark"
+                  >
+                    Sign in
+                  </a>
 
-              <a
-                href="/login"
-                className="font-roboto rounded-lg bg-[#DB4437] px-7 py-3 text-base font-medium text-white"
-              >
-                Sign Up
-              </a>
+                  <a
+                    href="/signup"
+                    className="font-roboto rounded-lg bg-[#DB4437] px-7 py-3 text-base font-medium text-white"
+                  >
+                    Sign Up
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -68,17 +91,20 @@ const Navbar = () => {
 
 export default Navbar;
 
-const ListItem = ({ children, NavLink }) => {
+interface ListItemProps {
+  children: React.ReactNode; // Define children prop
+  NavLink: string;
+}
+
+const ListItem: React.FC<ListItemProps> = ({ children, NavLink }) => {
   return (
-    <>
-      <li>
-        <a
-          href={NavLink}
-          className="font-roboto flex py-2 text-base font-medium text-dark hover:text-primary lg:ml-10 lg:inline-flex"
-        >
-          {children}
-        </a>
-      </li>
-    </>
+    <li>
+      <a
+        href={NavLink}
+        className="font-roboto flex py-2 text-base font-medium text-dark hover:text-primary lg:ml-10 lg:inline-flex"
+      >
+        {children}
+      </a>
+    </li>
   );
 };
