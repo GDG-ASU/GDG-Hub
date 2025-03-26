@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import Card from "./components/Card";
+import Post from "./components/Post";
 import Footer from "./components/Footer";
 import Auth from "./components/Auth";
 import Create from "./components/Create";
@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <>
       <div className=" bg-white">
-        <Card />
+        <Post />
         <Footer />
       </div>
     </>
