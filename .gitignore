@@ -1,0 +1,22 @@
+# Logs
+logs
+*.log
+
+# Dependency directories
+node_modules/
+
+# Build directories
+dist/
+build/
+
+# Docker
+volumes/
+*.env
+.env.*
+
+# Environment files
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
