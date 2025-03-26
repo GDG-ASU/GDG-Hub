@@ -1,4 +1,4 @@
-const Card = () => {
+const Post = () => {
   return (
     <>
       <section className=" mt-10 pb-10 pt-20 lg:pb-20 lg:pt-[120px]">
@@ -59,9 +59,16 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default Post;
 
-const SingleCard = ({ image, Button, CardDescription, CardTitle, titleHref, btnHref }) => {
+const SingleCard = ({
+  image,
+  Button,
+  CardDescription,
+  CardTitle,
+  titleHref,
+  btnHref,
+}) => {
   return (
     <>
       <div className="mb-10 overflow-hidden rounded-lg bg-white shadow-1 duration-300 hover:shadow-3 border border-black ">
@@ -75,7 +82,9 @@ const SingleCard = ({ image, Button, CardDescription, CardTitle, titleHref, btnH
               {CardTitle}
             </a>
           </h3>
-          <p className="font-roboto  mb-7 text-base leading-relaxed text-body-color ">{CardDescription}</p>
+          <p className="font-roboto  mb-7 text-base leading-relaxed text-body-color ">
+            {CardDescription}
+          </p>
 
           {Button && (
             <a
