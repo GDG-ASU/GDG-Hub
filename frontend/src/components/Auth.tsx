@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const [form, setForm] = useState({
@@ -8,14 +8,12 @@ const Signin = () => {
     password: "",
   });
 
-  const navigate = useNavigate(); // Create a navigate function for navigation
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if a token exists in localStorage
     const token = localStorage.getItem("token");
     if (token) {
-      // If token exists, redirect to the home page or another page
-      navigate("/#"); // Change "/home" to your desired route
+      navigate("/#");
     }
   }, [navigate]);
 
@@ -32,7 +30,7 @@ const Signin = () => {
         if (res.data.token) {
           localStorage.setItem("token", res.data.token);
           console.log("User logged in successfully:", res.data);
-          navigate("/home"); // Redirect after successful login
+          navigate("/#");
         }
       })
       .catch((err) => {

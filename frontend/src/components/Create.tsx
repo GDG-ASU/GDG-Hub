@@ -5,7 +5,7 @@ const Create = () => {
   const [form, setForm] = useState({
     title: "",
     link: "",
-    description: "",
+    content: "",
   });
 
   const handleChange = (e) => {
@@ -15,15 +15,18 @@ const Create = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/posts", form, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }).then((res) => {
-      window.location.href = "/";
-    }).catch((err) => {
-      console.log(err);
-    });
+    axios
+      .post("http://localhost:5000/posts", form, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -33,22 +36,43 @@ const Create = () => {
           <div className="w-full px-4">
             <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-gray-1 px-10 py-16 text-center sm:px-12 md:px-[60px] border border-black ">
               <div className="mb-10 text-center md:mb-16">
-                <h1 className="font-roboto text-4xl font-semibold text-dark dark:text-white">Create Post</h1>
+                <h1 className="font-roboto text-4xl font-semibold text-dark dark:text-white">
+                  Create Post
+                </h1>
               </div>
               <form onSubmit={handleSubmit}>
-                <label htmlFor="title" className="text-left block mb-2 text-base text-body-color font-roboto">
+                <label
+                  htmlFor="title"
+                  className="text-left block mb-2 text-base text-body-color font-roboto"
+                >
                   Title
                 </label>
-                <InputBox type="text" name="title" placeholder="Title" handleChange={handleChange} />
-                <label htmlFor="link" className="text-left block mb-2 text-base text-body-color font-roboto">
+                <InputBox
+                  type="text"
+                  name="title"
+                  placeholder="Title"
+                  handleChange={handleChange}
+                />
+                <label
+                  htmlFor="link"
+                  className="text-left block mb-2 text-base text-body-color font-roboto"
+                >
                   Link
                 </label>
-                <InputBox type="text" name="link" placeholder="Link" handleChange={handleChange} />
+                <InputBox
+                  type="text"
+                  name="link"
+                  placeholder="Link"
+                  handleChange={handleChange}
+                />
                 {/* <label htmlFor="title" className="text-left block mb-2 text-base text-body-color font-roboto">
                   Title
                 </label>
                 <InputBox type="text" name="title" placeholder="Title" handleChange={handleChange} /> */}
-                <label htmlFor="description" className="text-left block mb-2 text-base text-body-color font-roboto">
+                <label
+                  htmlFor="description"
+                  className="text-left block mb-2 text-base text-body-color font-roboto"
+                >
                   Description
                 </label>
                 <div className=" w-full ">
@@ -56,7 +80,10 @@ const Create = () => {
                     <MessageTextarea handleChange={handleChange} />
                   </DefaultColumn>
                 </div>
-                <label htmlFor="image" className="text-left block mb-2 text-base text-body-color font-roboto">
+                <label
+                  htmlFor="image"
+                  className="text-left block mb-2 text-base text-body-color font-roboto"
+                >
                   Upload Image
                 </label>
                 <div className=" w-full ">
@@ -116,7 +143,13 @@ const MessageTextarea = ({ handleChange }) => {
           className="border border-black w-full bg-transparent rounded-md  dark:border-dark-3 p-3 pl-12 text-dark-6 outline-none  disabled:cursor-default disabled:bg-gray-2"
         />
         <span className="absolute top-[18px] left-4">
-          <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            width={20}
+            height={20}
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <g opacity={0.8}>
               <path
                 fillRule="evenodd"
