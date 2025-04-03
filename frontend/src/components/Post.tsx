@@ -103,7 +103,11 @@ const SingleCard: React.FC<SingleCardProps> = ({
           </button>
         )}
 
-        <img src={image} alt="Post Image" className="w-full" />
+        <img
+          src={image}
+          alt="Post Image"
+          className="w-full h-80 object-cover"
+        />
 
         <div className="p-8 text-center sm:p-9 md:p-7 xl:p-9">
           <h3>
