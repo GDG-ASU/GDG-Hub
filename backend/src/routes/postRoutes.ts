@@ -1,24 +1,24 @@
 import express, { Request, Response } from "express";
-import authMiddleware  from "../auth/authMiddleware";
+import authMiddleware from "../auth/authMiddleware";
 import Post from "../models/post";
 
 const router = express.Router();
 
 // Create a new post
 router.post("/", authMiddleware, async (req: Request, res: Response) => {
-    const { title, content } = req.body;
-  
-    try {
-      const newPost = await Post.create({
-        title,
-        content,
-        userId: req.userId, 
-      });
-      res.status(201).json({ message: "Post created successfully.", post: newPost });
-    } catch (error) {
-      res.status(500).json({ message: "Error creating post.", error });
-    }
-  });
+  const { title, content } = req.body;
+
+  try {
+    const newPost = await Post.create({
+      title,
+      content,
+      userId: req.userId,
+    });
+    res.status(201).json({ message: "Post created successfully.", post: newPost });
+  } catch (error) {
+    res.status(500).json({ message: "Error creating post.", error });
+  }
+});
 
 // Get all posts
 router.get("/", async (req: Request, res: Response) => {
@@ -31,7 +31,7 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 // Update a post
-router.put("/:id", async (req, res) => {
+router.patch("/:id", authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     const { title, content } = req.body;
@@ -43,7 +43,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete a post
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     await Post.destroy({ where: { id } });

@@ -3,7 +3,10 @@ import axios from "axios";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const isAuthenticated = localStorage.getItem("token") !== null; // Check if the user is authenticated
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  const token = localStorage.getItem("token");
+
+  console.log("Token from localStorage:", token);
 
   const handleDelete = () => {
     localStorage.removeItem("token");
