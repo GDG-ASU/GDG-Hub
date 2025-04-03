@@ -3,6 +3,7 @@ import Post from "./components/Post";
 import Footer from "./components/Footer";
 import Auth from "./components/Auth";
 import Create from "./components/Create";
+import EditPost from "./components/EditPost";
 import { Routes, Route } from "react-router-dom";
 
 const Home = () => {
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Auth />} />
           <Route path="/create" element={<Create />} />
+          <Route path="/edit/:id" element={<EditPost />} />
         </Routes>
       </div>
     </>

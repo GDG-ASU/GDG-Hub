@@ -6,11 +6,9 @@ const Navbar = () => {
   const isAuthenticated = localStorage.getItem("token") !== null; // Check if the user is authenticated
 
   const handleDelete = () => {
-    // Remove the token from localStorage
     localStorage.removeItem("token");
     console.log("User logged out and token removed.");
-    // Optionally, redirect the user to the login page or home page
-    window.location.href = "/login"; // Redirect after logout
+    window.location.href = "/login";
   };
 
   return (
