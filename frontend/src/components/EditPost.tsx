@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const EditPost = () => {
-  const { id } = useParams(); // Get the post ID from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const [form, setForm] = useState({
     title: "",
@@ -11,25 +11,22 @@ const EditPost = () => {
     content: "",
   });
 
-  // Fetch existing post data
   useEffect(() => {
     axios
       .get(`http://localhost:5000/posts/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => {
-        setForm(res.data); // Populate form with existing data
+        setForm(res.data);
       })
       .catch((err) => console.log(err));
   }, [id]);
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -37,7 +34,7 @@ const EditPost = () => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then(() => {
-        navigate("/"); // Redirect after update
+        navigate("/");
       })
       .catch((err) => console.log(err));
   };
@@ -103,7 +100,6 @@ const EditPost = () => {
 
 export default EditPost;
 
-// Input Box Component
 const InputBox = ({ type, name, value, placeholder, handleChange }) => {
   return (
     <div className="mb-6">
@@ -119,7 +115,6 @@ const InputBox = ({ type, name, value, placeholder, handleChange }) => {
   );
 };
 
-// Textarea Component
 const MessageTextarea = ({ name, value, handleChange }) => {
   return (
     <textarea
